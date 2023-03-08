@@ -23,13 +23,12 @@
             tobycm.height = app.screen.height / 2;
             tobycm.width = app.screen.height / 2;
 
-            tobycm.x = app.screen.width / 2;
-            tobycm.y = app.screen.height / 2;
+            tobycm.position = { x: app.screen.height / 2, y: app.screen.width / 2 }
             tobycm.anchor.set(0.5, 0.5);
 
             app.ticker.add(() => {
                 tobycm.rotation += 0.005;
-                if tobycm.rotation > 1 tobycm.rotation -= 1
+                if (tobycm.rotation > 1) tobycm.rotation -= 1
             });
             app.stage.addChild(tobycm);
 
