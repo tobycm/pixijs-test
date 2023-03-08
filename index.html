@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/pixi.js@7.x/dist/pixi.min.js"></script>
+    <title>Pixi Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+        }
+    </style>
+</head>
+<body onclick="tobycm.rotation += 0.05">
+    <div id="app">
+        <script>
+            const app = new PIXI.Application({ background: "#1e1e1e" });
+
+            const tobycm = PIXI.Sprite.from('images/tobycm.png');
+            tobycm.height = app.screen.height / 2;
+            tobycm.width = app.screen.height / 2;
+
+            tobycm.x = app.screen.width / 2;
+            tobycm.y = app.screen.height / 2;
+            tobycm.anchor.set(0.5, 0.5);
+
+            app.ticker.add(() => tobycm.rotation += 0.005);
+            app.stage.addChild(tobycm);
+
+            document.querySelector("#app").appendChild(app.view);
+        </script>
+        
+        <style>
+            #app {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </div>
+</body>
+</html>
