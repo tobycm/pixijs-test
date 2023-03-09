@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,12 +15,14 @@
         }
     </style>
 </head>
-<body onclick="tobycm.rotation += 0.05">
+
+<body onclick="tobycm.rotation += 0.05; /* PIXI.sound.play('bamboo_hit'); */">
     <div id="app">
         <script>
             const app = new PIXI.Application({ background: "#1e1e1e" });
+            const tobycm = PIXI.Sprite.from('assets/images/tobycm.png');
+            PIXI.sound.add('bamboo_hit', 'assets/sounds/short_bamboo_hit.mp3');
 
-            const tobycm = PIXI.Sprite.from('images/tobycm.png');
             tobycm.height = app.screen.height / 2;
             tobycm.width = app.screen.height / 2;
 
@@ -33,8 +36,11 @@
             app.stage.addChild(tobycm);
 
             document.querySelector("#app").appendChild(app.view);
+
+            PIXI.sound.play('bamboo_hit');
+            PIXI.sound.play('bamboo_hit');
         </script>
-        
+
         <style>
             #app {
                 width: 100%;
@@ -46,4 +52,5 @@
         </style>
     </div>
 </body>
+
 </html>
