@@ -23,7 +23,12 @@
 <body onclick="tobycm.rotation += 0.05; PIXI.sound.play('bamboo_hit');">
     <div id="app">
         <script>
-            const app = new PIXI.Application({ background: "#1e1e1e" });
+            const app = new PIXI.Application({
+                background: "#1e1e1e",
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+            const ticker = PIXI.Ticker.shared;
             const tobycm = PIXI.Sprite.from('assets/images/tobycm.png');
             PIXI.sound.add('bamboo_hit', 'assets/sounds/short_bamboo_hit.mp3');
 
@@ -33,7 +38,11 @@
             tobycm.position = { x: app.screen.width / 2, y: app.screen.height / 2 }
             tobycm.anchor.set(0.5, 0.5);
 
-            app.ticker.add(() => tobycm.rotation += 0.005);
+            function spinningLogo() {
+                tobycm.rotation += 0.005;
+            }
+
+            ticker.add(spinningLogo);
             app.stage.addChild(tobycm);
 
             document.querySelector("#app").appendChild(app.view);
