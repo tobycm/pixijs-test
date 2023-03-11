@@ -1,4 +1,4 @@
-import startSpinning from "./spinningLogo";
+import startSpinning from "./spinningLogo.js";
 
 PIXI.sound.add("double_bamboo_hit", {
     url: 'assets/sounds/double_bamboo_hit.mp3',
