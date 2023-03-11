@@ -44,11 +44,13 @@ function startGame() {
         fadeOutOverlay.alpha += 0.01;
         if (fadeOutOverlay.alpha >= 1) {
             ticker.remove(fadeOut);
-            startScreen.destroy();
-            document.querySelector("#app").removeChild(startScreenView);
-
-            startSpinning();
-            PIXI.sound.play("double_bamboo_hit");
+            setTimeout(() => {
+                startScreen.destroy();
+                document.querySelector("#app").removeChild(startScreenView);
+    
+                startSpinning();
+                PIXI.sound.play("double_bamboo_hit");
+            }, 500);
         }
     }
     ticker.add(fadeOut)
