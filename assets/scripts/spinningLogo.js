@@ -4,10 +4,6 @@ const app = new PIXI.Application({
     height: window.innerHeight,
 });
 const tobycm = PIXI.Sprite.from('assets/images/tobycm.png');
-const bamboo_hit = PIXI.sound.Sound.from({
-    url: 'assets/sounds/short_bamboo_hit.mp3',
-    preload: true,
-});
 
 tobycm.height = app.screen.height / 2;
 tobycm.width = app.screen.height / 2;
@@ -29,5 +25,4 @@ export default function startSpinning() {
 
 function spinLogo() {
     tobycm.rotation += 0.05;
-    bamboo_hit.play();
 }

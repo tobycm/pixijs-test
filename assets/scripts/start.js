@@ -1,5 +1,10 @@
 import startSpinning from "./spinningLogo";
 
+PIXI.sound.add("bamboo_hit", {
+    url: 'assets/sounds/short_bamboo_hit.mp3',
+    preload: true,
+});
+
 const startScreen = new PIXI.Application({
     background: "#1e1e1e",
     width: window.innerWidth,
@@ -20,28 +25,43 @@ startText.position = {
 startText.anchor.set(0.5, 0.5);
 startScreen.stage.addChild(startText);
 
-document.querySelector("#app").appendChild(startScreen.view);
+const startScreenView = document.querySelector("#app").appendChild(startScreen.view);
 
-document.body.addEventListener('click', () => startGame());
-document.body.addEventListener('touchstart', () => startGame());
+document.body.addEventListener('click', () => startGame(), { once: true });
+document.body.addEventListener('touchstart', () => startGame(), { once: true });
 
 function startGame() {    
-    const fadeOut = new PIXI.Graphics();
-    fadeOut.beginFill(0x000000);
-    fadeOut.drawRect(0, 0,
+    const fadeOutOverlay = new PIXI.Graphics();
+    fadeOutOverlay.beginFill(0x000000);
+    fadeOutOverlay.drawRect(0, 0,
         startScreen.screen.width, startScreen.screen.height);
-    fadeOut.endFill();
-    fadeOut.alpha = 0;
-    startScreen.stage.addChild(fadeOut);
+    fadeOutOverlay.endFill();
+    fadeOutOverlay.alpha = 0;
+    startScreen.stage.addChild(fadeOutOverlay);
 
-    const fadeOutTicker = PIXI.Ticker.shared;
-    fadeOutTicker.add(() => {
-        fadeOut.alpha += 0.01;
-        if (fadeOut.alpha >= 1) {
-            fadeOutTicker.stop();
+    const ticker = PIXI.Ticker.shared;
+    function fadeOut() {
+        fadeOutOverlay.alpha += 0.01;
+        if (fadeOutOverlay.alpha >= 1) {
+            ticker.remove(fadeOut);
             startScreen.destroy();
+            document.querySelector("#app").removeChild(startScreenView);
+
+            let playTimes = 0;
+            const startSound = setInterval(() => {
+                PIXI.sound.play("bamboo_hit");
+                if (playTimes == 2) {
+                    clearInterval(startSound);
+                }
+                playTimes++;
+            }, 100);
+            
+            PIXI.sound.play("bamboo_hit");
+            PIXI.sound.play("bamboo_hit");
+
             startSpinning();
         }
-    })
+    }
+    ticker.add(fadeOut)
 
 }
