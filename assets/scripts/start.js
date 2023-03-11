@@ -1,7 +1,7 @@
 import startSpinning from "./spinningLogo";
 
-PIXI.sound.add("bamboo_hit", {
-    url: 'assets/sounds/short_bamboo_hit.mp3',
+PIXI.sound.add("double_bamboo_hit", {
+    url: 'assets/sounds/double_bamboo_hit.mp3',
     preload: true,
 });
 
@@ -47,19 +47,8 @@ function startGame() {
             startScreen.destroy();
             document.querySelector("#app").removeChild(startScreenView);
 
-            let playTimes = 0;
-            const startSound = setInterval(() => {
-                PIXI.sound.play("bamboo_hit");
-                if (playTimes == 2) {
-                    clearInterval(startSound);
-                }
-                playTimes++;
-            }, 100);
-            
-            PIXI.sound.play("bamboo_hit");
-            PIXI.sound.play("bamboo_hit");
-
             startSpinning();
+            PIXI.sound.play("double_bamboo_hit");
         }
     }
     ticker.add(fadeOut)
