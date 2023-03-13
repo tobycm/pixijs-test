@@ -6,7 +6,7 @@ PIXI.sound.add("double_bamboo_hit", {
 });
 
 const startScreen = new PIXI.Application({
-    background: "#1e1e1e",
+    background: "#000000",
     width: window.innerWidth,
     height: window.innerHeight,
 });
@@ -30,7 +30,7 @@ const startScreenView = document.querySelector("#app").appendChild(startScreen.v
 document.body.addEventListener('click', () => startGame(), { once: true });
 document.body.addEventListener('touchstart', () => startGame(), { once: true });
 
-function startGame() {    
+function startGame() {
     const fadeOutOverlay = new PIXI.Graphics();
     fadeOutOverlay.beginFill(0x000000);
     fadeOutOverlay.drawRect(0, 0,
@@ -47,7 +47,7 @@ function startGame() {
             setTimeout(() => {
                 startScreen.destroy();
                 document.querySelector("#app").removeChild(startScreenView);
-    
+
                 startSpinning();
                 PIXI.sound.play("double_bamboo_hit");
             }, 500);
